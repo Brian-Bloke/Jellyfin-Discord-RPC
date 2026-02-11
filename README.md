@@ -9,11 +9,11 @@
 ## Configuring the script
 Install the latest versions of the imported libraries.
 You only need to edit out these fields in the script
-	- PIPE_PATH
-	- TMDB_API_KEY
-	- JELLYFIN_API_KEY
-	- JELLYFIN_SERVER
-	- DISCORD_API_KEY
+- PIPE_PATH
+- TMDB_API_KEY
+- JELLYFIN_API_KEY
+- JELLYFIN_SERVER
+- DISCORD_API_KEY
 
 
 ## Generating the JELLYFIN_API_KEY

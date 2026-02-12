@@ -63,7 +63,7 @@ def get_song_poster(song_name,artists_name):
         text = text[:-1]
         url=f"https://itunes.apple.com/search?term={text}&entity=song&limit=1"
         response = requests.get(url).json()
-        if response['results']:
+        if response:
             try:
                 info[10]=response['results'][0]['artworkUrl100']
                 return response['results'][0]['artworkUrl100']
@@ -102,7 +102,7 @@ def get_movie_poster(title,year):
 
         response = requests.get(search_url, params=params).json()
 
-        if response['results']:
+        if response:
             try:
                 poster_path=response['results'][0]['poster_path']
             except:
@@ -139,7 +139,7 @@ def get_show_poster(title,year):
 
         response = requests.get(search_url, params=params).json()
 
-        if response['results']:
+        if response:
             try:
                 poster_path=response['results'][0]['poster_path']
             except:

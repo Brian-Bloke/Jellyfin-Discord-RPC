@@ -30,6 +30,6 @@ Go to https://www.themoviedb.org/ then sign in. Click on your profile and then c
 ![RPC](images/10.png)
 ![RPC](images/11.png)
 
-## Runing the script
+## Running the script
 
 Just run `python3 main.py`

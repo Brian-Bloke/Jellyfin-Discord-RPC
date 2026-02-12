@@ -23,7 +23,7 @@ JELLYFIN_SERVER = "http://192.168.1.2:8096/Sessions"
 DISCORD_API_KEY = ""
 
 #All the information about the media will be stored in this array
-info=["Media_Name","watch_state","start","end","showname","duration","Production_Year","Genres","Media_type","song_artist","poster_url","was_playing"]
+info=["Media_Name","watch_state","start","end","showname","S&Enum","Production_Year","Genres","Media_type","song_artist","poster_url","was_playing"]
 
 
 

@@ -295,7 +295,8 @@ def main():
                     "cmd": "SET_ACTIVITY",
                     "args": {
                         "activity": {
-                            "details": f"{info[0]} ({', '.join(info[9])})",
+                            "details": f"{info[0]}",
+                            "state": f"{', '.join(info[9])}",
                             "name": info[0],
                             "timestamps": {
                                 "start": info[2],
@@ -314,8 +315,8 @@ def main():
                     "cmd": "SET_ACTIVITY",
                     "args": {
                         "activity": {
-                            "details": f"{info[0]} ({', '.join(info[9])})",
-                            "state": "paused ⏸ ",
+                            "details": f"{info[0]}",
+                            "state": f"{', '.join(info[9])} ⏸ ",
                             "name": info[0],
                             "assets": {
                                 "large_image": f"{get_song_poster(info[0],info[9])}",
@@ -336,8 +337,8 @@ def main():
                     "cmd": "SET_ACTIVITY",
                     "args": {
                         "activity": {
-                            "details": f"{info[4]} -{info[5]}",
-                            "state": f"{', '.join(info[7])}",
+                            "details": f"{info[4]}",
+                            "state": f"{info[5]} - {info[0]}",
                             "name": info[4],
                             "timestamps": {
                                 "start": info[2],
@@ -356,8 +357,8 @@ def main():
                     "cmd": "SET_ACTIVITY",
                     "args": {
                         "activity": {
-                            "details": f"{info[4]} -{info[5]}",
-                            "state": f"{', '.join(info[7])} ⏸ ",
+                            "details": f"{info[4]}",
+                            "state": f"{info[5]} - {info[0]}⏸ ",
                             "name": info[4],
                             "assets": {
                                 "large_image": f"{get_show_poster(info[4],info[6])}",

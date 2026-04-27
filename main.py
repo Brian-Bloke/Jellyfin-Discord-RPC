@@ -279,7 +279,8 @@ def main():
                                 },
                             "assets": {
                                 "large_image": f"{get_movie_poster(info[0],info[6])}",
-                                "small_image": client_icon
+                                "small_image": client_icon,
+                                "small_text":client
                                 },
                             "type": 3
                             },
@@ -296,7 +297,8 @@ def main():
                             "name": info[0],
                             "assets": {
                                 "large_image": f"{get_movie_poster(info[0],info[6])}",
-                                "small_image": client_icon
+                                "small_image": client_icon,
+                                "small_text":client
                                 },
                             "type": 3
                             },
@@ -323,7 +325,8 @@ def main():
                                 },
                             "assets": {
                                 "large_image": f"{get_song_poster(info[0],info[9])}",
-                                "small_image": client_icon
+                                "small_image": client_icon,
+                                "small_text":client
                                 },
                             "type": 2
                             },
@@ -340,7 +343,8 @@ def main():
                             "name": info[0],
                             "assets": {
                                 "large_image": f"{get_song_poster(info[0],info[9])}",
-                                "small_image": client_icon
+                                "small_image": client_icon,
+                                "small_text":client
                                 },
                             "type": 2
                             },
@@ -368,6 +372,7 @@ def main():
                             "assets": {
                                 "large_image": f"{get_show_poster(info[4],info[6])}",
                                 "small_image": client_icon
+                                "small_text": client
                                 },
                             "type": 3
                             },
@@ -384,7 +389,8 @@ def main():
                             "name": info[4],
                             "assets": {
                                 "large_image": f"{get_show_poster(info[4],info[6])}",
-                                "small_image": client_icon
+                                "small_image": client_icon,
+                                "small_text": client
                                 },
                             "type": 3
                             },

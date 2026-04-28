@@ -69,10 +69,10 @@ def get_song_poster(song_name,artists_name):
                 info[10]=response['results'][0]['artworkUrl100']
                 return response['results'][0]['artworkUrl100']
             except:
-                info[10]="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+                info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
                 return info[10]
         else:
-            info[10]="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+            info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
             return info[10]
     else:
         return info[10]
@@ -107,16 +107,16 @@ def get_movie_poster(title,year):
             try:
                 poster_path=next((m.get("poster_path") for m in response.get("results", []) if m.get("poster_path") and m.get("release_date", "").startswith(str(year))),None)
             except:
-                info[10] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
                 return info[10]
             if not(poster_path is None):
-                info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=fill"
+                info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
                 return info[10]
             else:
-                info[10] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
                 return info[10]
         else:
-            info[10]="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+            info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
             return info[10]
     else:
         return info[10]
@@ -142,18 +142,18 @@ def get_show_poster(title,year):
 
         if response:
             try:
-                poster_path=next((m.get("poster_path") for m in response.get("results", []) if m.get("poster_path") and m.get("release_date", "").startswith(str(year))),None)
+                poster_path=next((m.get("poster_path") for m in response.get("results", []) if m.get("poster_path") and m.get("first_air_date", "").startswith(str(year))),None)
             except:
-                info[10] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
                 return info[10]
             if not(poster_path is None):
-                info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=fill"
+                info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
                 return info[10]
             else:
-                info[10] = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
                 return info[10]
         else:
-            info[10]="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s"
+            info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
             return info[10]
     else:
         return info[10]
@@ -285,7 +285,7 @@ def main():
 
                 """
                 send_frame(sock, 1, presence_clear)
-                time.sleep(1)
+                time.sleep(10)
         print(info)
         if info[8] == "Movie":
             presence_watching = {
@@ -424,8 +424,8 @@ def main():
                 send_frame(sock, 1, presence_watching)
             if info[1] == "Paused":
                 send_frame(sock, 1, presence_paused)
-            time.sleep(5)  
-        time.sleep(5)
+            time.sleep(10)  
+        time.sleep(10)
     sock.close()
 
 if __name__ == "__main__":

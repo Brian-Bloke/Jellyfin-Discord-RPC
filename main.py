@@ -15,7 +15,7 @@ JELLYFIN DISCORD RPC VER 1
 """
 
 #README provides the instrunctions to obtain the required API keys
-#PIPE_PATH may differ. It's discord-rpc-0. The last number and the directory may vary. (Eg:- /tmp/, /var/). For linux and mac this will most likely be the case. For windows I am not sure whether Windows treats pipes as files 
+#PIPE_PATH may differ. Check $XDG_RUNTIME_DIR environment variable in your shell to find the directory where your pipe is. It's discord-rpc-0. The last number and the directory may vary. (Eg:- /tmp/, /var/). For linux and mac this will most likely be the case. For windows I am not sure whether Windows treats pipes as files 
 
 PIPE_PATH="/run/user/1000/discord-ipc-0"
 TMDB_API_KEY = ""
@@ -220,6 +220,8 @@ def fetch_jellyfin_api():
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellify.png"
         case "Moonfin for Android":
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/moonfin.jpeg"
+        case "Moonfin for Tizen": 
+            client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/moonfin.jpeg"
         case "Findroid":
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/findroid.png"
         case _:
@@ -262,6 +264,24 @@ def main():
                     },
                     "nonce": "clear_activity"
                 }
+                """
+                if you face any errors when clearing your rpc after a media has ended. Try switching presnece_clear to this
+                presence_clear= {
+                    "cmd": "SET_ACTIVITY",
+                    "args": {
+                        "pid": os.getpid(),
+                        "activity": {
+                            "type": 0,
+                            "name": "",
+                            "details": "",
+                            "state": "",
+                            "assets": {}
+                        }
+                    },
+                    "nonce": "1234"
+                }
+
+                """
                 send_frame(sock, 1, presence_clear)
                 time.sleep(1)
         print(info)
@@ -371,7 +391,7 @@ def main():
                                 },
                             "assets": {
                                 "large_image": f"{get_show_poster(info[4],info[6])}",
-                                "small_image": client_icon
+                                "small_image": client_icon,
                                 "small_text": client
                                 },
                             "type": 3

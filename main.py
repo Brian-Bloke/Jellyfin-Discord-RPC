@@ -218,6 +218,8 @@ def fetch_jellyfin_api():
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/streamyfin.jpeg"
         case "Jellify":
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellify.png"
+        case "Moonfin for Linux":
+            client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/moonfin.jpeg"
         case "Moonfin for Android":
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/moonfin.jpeg"
         case "Moonfin for Tizen": 

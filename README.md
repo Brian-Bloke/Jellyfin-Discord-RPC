@@ -1,12 +1,10 @@
 # PYTHON JELLYFIN DISCORD RPC
-![RPC](images/1.png)
-![RPC](images/2.png)
-![RPC](images/3.png)
-![RPC](images/4.png)
-![RPC](images/5.png)
-![RPC](images/6.png)
-![RPC](images/o.png)
-![RPC](images/k.png)
+![RPC](images/1.jpg)
+![RPC](images/2.jpg)
+![RPC](images/3.jpg)
+![RPC](images/4.jpg)
+![RPC](images/5.jpg)
+![RPC](images/6.jpg)
 ## Configuring the script
 Install the latest versions of the imported libraries.
 You only need to edit out these fields in the script

@@ -7,11 +7,13 @@ import requests
 
 
 """
-JELLYFIN DISCORD RPC VER 1
+JELLYFIN DISCORD RPC VER 1.0.1
     -A custom rpc script designed to show your jellyfin status in your Discord profile
     -Supports Movies, Shows and Songs 
     -Hit me up if you face any errors. Ill try to fix it 
     -New feature: Displays your jellyfin client's icon in your rpc
+    -Changes:
+        VER 1.0.1: improved the get_show_poster() function
 """
 
 #README provides the instrunctions to obtain the required API keys
@@ -131,7 +133,7 @@ def get_show_poster(title,year):
     global info
     if info[11] != title + " " + str(year):
         info[11]=title + " " + str(year)
-        search_url = f"https://api.themoviedb.org/3/search/tv"
+        search_url = f"https://api.themoviedb.org/3/search/tv"       
         params = {
             "api_key": TMDB_API_KEY,
             "query": title,
@@ -149,9 +151,29 @@ def get_show_poster(title,year):
             if not(poster_path is None):
                 info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
                 return info[10]
-            else:
-                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                return info[10]
+            else:        
+                params = {
+                    "api_key": TMDB_API_KEY,
+                    "query": title
+                }
+
+                response = requests.get(search_url, params=params).json()
+
+                if response:
+                    try:
+                        poster_path=next(m.get("poster_path") for m in response.get("results", []) if m.get("poster_path"))
+                    except:
+                        info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                        return info[10]
+                    if not(poster_path is None):
+                        info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
+                        return info[10]
+                    else:
+                        info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                        return info[10]
+                else:
+                    info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                    return info[10]
         else:
             info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
             return info[10]

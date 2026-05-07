@@ -248,6 +248,8 @@ def fetch_jellyfin_api():
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/moonfin.jpeg"
         case "Findroid":
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/findroid.png"
+        case "Litefin":
+            client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/litefin.png"
         case _:
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
     show_info = "S" + str(session["NowPlayingItem"].get('ParentIndexNumber', 'Unknown')) + " E" + str(session["NowPlayingItem"].get('IndexNumber', 'Unknown'))

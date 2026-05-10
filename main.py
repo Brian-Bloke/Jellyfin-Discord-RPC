@@ -18,15 +18,15 @@ JELLYFIN DISCORD RPC VER 1.0.1
 
 #README provides the instrunctions to obtain the required API keys
 #PIPE_PATH may differ. Check $XDG_RUNTIME_DIR environment variable in your shell to find the directory where your pipe is. It's discord-rpc-0. The last number and the directory may vary. (Eg:- /tmp/, /var/). For linux and mac this will most likely be the case. For windows I am not sure whether Windows treats pipes as files 
-
+"""
 PIPE_PATH="/run/user/1000/discord-ipc-0"
 TMDB_API_KEY = ""
 JELLYFIN_API_KEY = ""
-JELLYFIN_SERVER = "http://192.168.1.2:8096/Sessions"
+JELLYFIN_SERVER = "http://192.168.1.2:8096"
 DISCORD_API_KEY = ""
-
+"""
 #All the information about the media will be stored in this array
-info=["Media_Name","watch_state","start","end","showname","S&Enum","Production_Year","Genres","Media_type","song_artist","poster_url","was_playing"]
+info=["Media_Name","watch_state","start","end","showname","S&Enum","Production_Year","Genres","Media_type","song_artist","first_air_date_year","poster_url","was_playing"]
 
 client_icon=""
 client=""
@@ -53,8 +53,8 @@ Btw props to itunes for allowing us to use their api without an api key
 """
 def get_song_poster(song_name,artists_name):
     global info
-    if info[11] != (song_name + " " + " ".join(artists_name)):
-        info[11] = song_name +  " " + " ".join(artists_name)
+    if info[12] != (song_name + " " + " ".join(artists_name)):
+        info[12] = song_name +  " " + " ".join(artists_name)
         text=""
         title=song_name.split(" ")
         for i in title:
@@ -68,16 +68,16 @@ def get_song_poster(song_name,artists_name):
         response = requests.get(url).json()
         if response:
             try:
-                info[10]=response['results'][0]['artworkUrl100']
+                info[11]=response['results'][0]['artworkUrl100']
                 return response['results'][0]['artworkUrl100']
             except:
-                info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                return info[10]
+                info[11]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                return info[11]
         else:
-            info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-            return info[10]
+            info[11]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+            return info[11]
     else:
-        return info[10]
+        return info[11]
 
 
 
@@ -94,8 +94,8 @@ So this script is using a publically available cdn to resize the image to 500x50
 """
 def get_movie_poster(title,year):
     global info
-    if info[11] != title + " " + str(year):
-        info[11]=title + " " + str(year)
+    if info[12] != title + " " + str(year):
+        info[12]=title + " " + str(year)
         search_url = f"https://api.themoviedb.org/3/search/movie"
         params = {
             "api_key": TMDB_API_KEY,
@@ -109,19 +109,19 @@ def get_movie_poster(title,year):
             try:
                 poster_path=next((m.get("poster_path") for m in response.get("results", []) if m.get("poster_path") and m.get("release_date", "").startswith(str(year))),None)
             except:
-                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                return info[10]
+                info[11] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                return info[11]
             if not(poster_path is None):
-                info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
-                return info[10]
+                info[11] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
+                return info[11]
             else:
-                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                return info[10]
+                info[11] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                return info[11]
         else:
-            info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-            return info[10]
+            info[11]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+            return info[11]
     else:
-        return info[10]
+        return info[11]
 
 
 
@@ -131,8 +131,8 @@ We're using this to obtain a poster image if the media is a series. Exactly simi
 """
 def get_show_poster(title,year):
     global info
-    if info[11] != title + " " + str(year):
-        info[11]=title + " " + str(year)
+    if info[12] != title + " " + str(year):
+        info[12]=title + " " + str(year)
         search_url = f"https://api.themoviedb.org/3/search/tv"       
         params = {
             "api_key": TMDB_API_KEY,
@@ -146,11 +146,11 @@ def get_show_poster(title,year):
             try:
                 poster_path=next((m.get("poster_path") for m in response.get("results", []) if m.get("poster_path") and m.get("first_air_date", "").startswith(str(year))),None)
             except:
-                info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                return info[10]
+                info[11] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                return info[11]
             if not(poster_path is None):
-                info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
-                return info[10]
+                info[11] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
+                return info[11]
             else:        
                 params = {
                     "api_key": TMDB_API_KEY,
@@ -163,22 +163,22 @@ def get_show_poster(title,year):
                     try:
                         poster_path=next(m.get("poster_path") for m in response.get("results", []) if m.get("poster_path"))
                     except:
-                        info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                        return info[10]
+                        info[11] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                        return info[11]
                     if not(poster_path is None):
-                        info[10] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
-                        return info[10]
+                        info[11] = "https://images.weserv.nl/?url="+ "https://image.tmdb.org/t/p/w500"+ poster_path + "&w=500&h=500&fit=contain"
+                        return info[11]
                     else:
-                        info[10] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                        return info[10]
+                        info[11] = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                        return info[11]
                 else:
-                    info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-                    return info[10]
+                    info[11]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+                    return info[11]
         else:
-            info[10]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
-            return info[10]
+            info[11]="https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
+            return info[11]
     else:
-        return info[10]
+        return info[11]
 
 
 
@@ -226,7 +226,7 @@ def fetch_jellyfin_api():
     global info
     global client_icon
     global client
-    sessions = requests.get(JELLYFIN_SERVER, headers={"X-Emby-Token": JELLYFIN_API_KEY}).json()
+    sessions = requests.get(f"{JELLYFIN_SERVER}/Sessions", headers={"X-Emby-Token": JELLYFIN_API_KEY}).json()
     session=sessions[0]
     duration=session["NowPlayingItem"].get("RunTimeTicks", 0) / 10000000
     progress = session["PlayState"]["PositionTicks"] / 10000000
@@ -253,7 +253,13 @@ def fetch_jellyfin_api():
         case _:
             client_icon = "https://raw.githubusercontent.com/Brian-Bloke/Jellyfin-Discord-RPC/refs/heads/main/images/client_images/jellyfin.jpeg"
     show_info = "S" + str(session["NowPlayingItem"].get('ParentIndexNumber', 'Unknown')) + " E" + str(session["NowPlayingItem"].get('IndexNumber', 'Unknown'))
-    info[:10] = [session["NowPlayingItem"].get('Name', 'Unknown'),  "Paused" if session["PlayState"]["IsPaused"] else "Playing", start,end,session["NowPlayingItem"].get('SeriesName', 'Unknown'),show_info, session["NowPlayingItem"].get('ProductionYear', 'Unknown'), session["NowPlayingItem"].get('Genres', 'Unknown'), session["NowPlayingItem"]["Type"], session["NowPlayingItem"].get("Artists", 'Unknown')]
+    series_id = session["NowPlayingItem"].get("SeriesId")
+    user_id = session["UserId"]
+    first_air_date_year=""
+    if series_id:
+        series = requests.get(f"{JELLYFIN_SERVER}/Users/{user_id}/Items/{series_id}",headers={"X-Emby-Token": f"{JELLYFIN_API_KEY}"}).json()
+        first_air_date_year = series.get("PremiereDate", "")[:4]
+    info[:11] = [session["NowPlayingItem"].get('Name', 'Unknown'),  "Paused" if session["PlayState"]["IsPaused"] else "Playing", start,end,session["NowPlayingItem"].get('SeriesName', 'Unknown'),show_info, session["NowPlayingItem"].get('ProductionYear', 'Unknown'), session["NowPlayingItem"].get('Genres', 'Unknown'), session["NowPlayingItem"]["Type"], session["NowPlayingItem"].get("Artists", 'Unknown'),first_air_date_year]
     return info
 
 
@@ -416,7 +422,7 @@ def main():
                                 "end": info[3]
                                 },
                             "assets": {
-                                "large_image": f"{get_show_poster(info[4],info[6])}",
+                                "large_image": f"{get_show_poster(info[4],info[10])}",
                                 "small_image": client_icon,
                                 "small_text": client
                                 },
@@ -434,7 +440,7 @@ def main():
                             "state": f"{info[5]} - {info[0]}⏸ ",
                             "name": info[4],
                             "assets": {
-                                "large_image": f"{get_show_poster(info[4],info[6])}",
+                                "large_image": f"{get_show_poster(info[4],info[10])}",
                                 "small_image": client_icon,
                                 "small_text": client
                                 },

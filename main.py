@@ -7,13 +7,13 @@ import requests
 
 
 """
-JELLYFIN DISCORD RPC VER 1.0.1
+JELLYFIN DISCORD RPC VER 1.0.2
     -A custom rpc script designed to show your jellyfin status in your Discord profile
     -Supports Movies, Shows and Songs 
     -Hit me up if you face any errors. Ill try to fix it 
     -New feature: Displays your jellyfin client's icon in your rpc
     -Changes:
-        VER 1.0.1: improved the get_show_poster() function
+        VER 1.0.2: improved the get_show_poster() function
 """
 
 #README provides the instrunctions to obtain the required API keys

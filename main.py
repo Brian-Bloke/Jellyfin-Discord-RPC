@@ -7,24 +7,21 @@ import requests
 
 
 """
-JELLYFIN DISCORD RPC VER 1.0.2
+JELLYFIN DISCORD RPC VER 1.0.3
     -A custom rpc script designed to show your jellyfin status in your Discord profile
     -Supports Movies, Shows and Songs 
     -Hit me up if you face any errors. Ill try to fix it 
     -New feature: Displays your jellyfin client's icon in your rpc
-    -Changes:
-        VER 1.0.2: improved the get_show_poster() function
 """
 
 #README provides the instrunctions to obtain the required API keys
 #PIPE_PATH may differ. Check $XDG_RUNTIME_DIR environment variable in your shell to find the directory where your pipe is. It's discord-rpc-0. The last number and the directory may vary. (Eg:- /tmp/, /var/). For linux and mac this will most likely be the case. For windows I am not sure whether Windows treats pipes as files 
-"""
 PIPE_PATH="/run/user/1000/discord-ipc-0"
 TMDB_API_KEY = ""
 JELLYFIN_API_KEY = ""
 JELLYFIN_SERVER = "http://192.168.1.2:8096"
 DISCORD_API_KEY = ""
-"""
+JELLYFIN_USERNAME = ""
 #All the information about the media will be stored in this array
 info=["Media_Name","watch_state","start","end","showname","S&Enum","Production_Year","Genres","Media_type","song_artist","first_air_date_year","poster_url","was_playing"]
 
@@ -226,8 +223,8 @@ def fetch_jellyfin_api():
     global info
     global client_icon
     global client
-    sessions = requests.get(f"{JELLYFIN_SERVER}/Sessions", headers={"X-Emby-Token": JELLYFIN_API_KEY}).json()
-    session=sessions[0]
+    sessions = requests.get(f"{JELLYFIN_SERVER}/Sessions", headers={"Authorization": f"MediaBrowser Token={JELLYFIN_API_KEY}"}).json()
+    session = next((k for k in sessions if k.get("UserName") == JELLYFIN_USERNAME),None)
     duration=session["NowPlayingItem"].get("RunTimeTicks", 0) / 10000000
     progress = session["PlayState"]["PositionTicks"] / 10000000
     start = int(time.time()) - int(progress)

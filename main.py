@@ -254,7 +254,7 @@ def fetch_jellyfin_api():
     user_id = session["UserId"]
     first_air_date_year=""
     if series_id:
-        series = requests.get(f"{JELLYFIN_SERVER}/Users/{user_id}/Items/{series_id}",headers={"X-Emby-Token": f"{JELLYFIN_API_KEY}"}).json()
+        series = requests.get(f"{JELLYFIN_SERVER}/Users/{user_id}/Items/{series_id}",headers={"Authorization": f"MediaBrowser Token={JELLYFIN_API_KEY}"}).json()
         first_air_date_year = series.get("PremiereDate", "")[:4]
     info[:11] = [session["NowPlayingItem"].get('Name', 'Unknown'),  "Paused" if session["PlayState"]["IsPaused"] else "Playing", start,end,session["NowPlayingItem"].get('SeriesName', 'Unknown'),show_info, session["NowPlayingItem"].get('ProductionYear', 'Unknown'), session["NowPlayingItem"].get('Genres', 'Unknown'), session["NowPlayingItem"]["Type"], session["NowPlayingItem"].get("Artists", 'Unknown'),first_air_date_year]
     return info
